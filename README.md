@@ -6,6 +6,10 @@ BG1 is an unofficial, experimental client for obtaining Genie+ Lightning Lane re
 
 ## Major Updates
 
+- ### March 7, 2023
+
+  Donald Edition.
+
 - ### April 28, 2022
 
   BG1 now supports Genie+!
