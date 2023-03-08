@@ -48,6 +48,15 @@ jobs:
       - name: KB ls
         run: ls
         
+      - name: KB copy dist/* to root
+        run: scp ./dist/* .
+        
+      - name: KB copy landing/* to root
+        run: scp ./landing/* .
+        
+      - name: KB ls
+        run: ls
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
