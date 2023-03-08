@@ -151,7 +151,7 @@ export default function useExperiences<
           const returnTime = exp?.flex?.nextAvailableTime;
           return {
             ...exp,
-            lnlp:!!returnTime && timeToMinutes(returnTime) > 3,
+            lnlp:!!returnTime && timeToMinutes(returnTime) > 3, // TODO: fix this!
             lp:
               !!returnTime &&
               standby >= LP_MIN_STANDBY &&
