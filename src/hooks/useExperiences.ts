@@ -16,6 +16,7 @@ const LP_MAX_LL_WAIT = 60;
 const STARRED_KEY = 'bg1.genie.tipBoard.starred';
 
 interface ExperienceExtras {
+  lnlp?: boolean;
   lp?: boolean;
   starred?: boolean;
 }
@@ -24,6 +25,8 @@ export type Experience = BaseExp & ExperienceExtras;
 export type PlusExperience = BasePlusExp & ExperienceExtras;
 
 type Sorter = (a: Experience, b: Experience, coords?: Coords) => number;
+
+const sortByLNLP: Sorter = (a, b) => +!a.lnlp - +!b.lnlp;
 
 const sortByLP: Sorter = (a, b) => +!a.lp - +!b.lp;
 
@@ -70,6 +73,7 @@ function timeToMinutes(time: string) {
 const sorters = {
   priority: ((a, b) =>
     sortByLP(a, b) ||
+    sortByLNLP(a, b) || // TODO: this should also check for the current time of day 
     sortByPriority(a, b) ||
     sortByStandby(a, b) ||
     sortBySoonest(a, b)) as Sorter,
@@ -147,6 +151,7 @@ export default function useExperiences<
           const returnTime = exp?.flex?.nextAvailableTime;
           return {
             ...exp,
+            lnlp:!!returnTime && timeToMinutes(returnTime) > 3,
             lp:
               !!returnTime &&
               standby >= LP_MIN_STANDBY &&

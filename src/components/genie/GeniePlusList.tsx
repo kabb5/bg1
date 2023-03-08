@@ -4,6 +4,7 @@ import { useTheme } from '@/contexts/Theme';
 import { displayTime } from '@/datetime';
 import { PlusExperience } from '@/hooks/useExperiences';
 import CheckmarkIcon from '@/icons/CheckmarkIcon';
+import DiceIcon from '@/icons/DiceIcon';
 import DropIcon from '@/icons/DropIcon';
 import LightningIcon from '@/icons/LightningIcon';
 import StarIcon from '@/icons/StarIcon';
@@ -18,6 +19,7 @@ import RebookingHeader from './RebookingHeader';
 import StandbyTime from './StandbyTime';
 import TimeBanner from './TimeBanner';
 
+const LATE_NIGHT_LOTTO_PICK = 'Late Night Lotto Pick';
 const LIGHTNING_PICK = 'Lightning Pick';
 const UPCOMING_DROP = 'Upcoming Drop';
 const BOOKED = 'Booked';
@@ -37,6 +39,7 @@ export default function GeniePlusList({
   const exp = experiences[0];
   const dropTime = exp && client.nextDropTime(exp.park);
 
+  const showLateNightLottoPickModal = () => modal.show(<LateNightLottoPickModal />);
   const showLightningPickModal = () => modal.show(<LightningPickModal />);
   const showDropTimeModal = () =>
     modal.show(<DropTimeModal dropTime={dropTime} park={exp.park} />);
@@ -52,7 +55,11 @@ export default function GeniePlusList({
         <h3 className="flex-1 mt-0 text-lg font-semibold leading-tight truncate">
           {exp.name}
         </h3>
-        {exp.lp ? (
+        {exp.lnlp ? (<InfoButton
+            name={LATE_NIGHT_LOTTO_PICK}
+            icon={DiceIcon}
+            onClick={showLateNightLottoPickModal}
+          />) : exp.lp ? (
           <InfoButton
             name={LIGHTNING_PICK}
             icon={LightningIcon}
@@ -170,6 +177,18 @@ function StarButton({
     >
       <StarIcon className={experience.starred ? theme.text : 'text-gray-300'} />
     </button>
+  );
+}
+
+function LateNightLottoPickModal() {
+  return (
+    <Modal heading={LATE_NIGHT_LOTTO_PICK}>
+      <p>
+        When an attraction has a Lightning Lane return time near park closing time,
+        it's highlighted as a Late Night Lotto Pick. Book these and hope they go
+        down to generate a Multiple Experience Pass for tomorrow!
+      </p>
+    </Modal>
   );
 }
 
