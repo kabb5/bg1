@@ -26,5 +26,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Run deploy.sh
-      run: ./deploy.sh
+    - name: PWD
+      run: pwd
+    - name: LS
+      run: ls
+    # - name: Run deploy.sh
+    #   run: ./deploy.sh
