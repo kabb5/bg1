@@ -55,11 +55,14 @@ export default function GeniePlusList({
         <h3 className="flex-1 mt-0 text-lg font-semibold leading-tight truncate">
           {exp.name}
         </h3>
-        {exp.lnlp ? (<InfoButton
+        {exp.lnlp ? (
+          <InfoButton
             name={LATE_NIGHT_LOTTO_PICK}
             icon={DiceIcon}
             onClick={showLateNightLottoPickModal}
-          />) : exp.lp ? (
+          />
+          ) : null}
+        { exp.lp ? (
           <InfoButton
             name={LIGHTNING_PICK}
             icon={LightningIcon}
