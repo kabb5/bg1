@@ -39,7 +39,7 @@ async function renderApp(
       DLR: 'America/Los_Angeles',
     }[apiClient.resort]
   );
-  document.title = 'BG1';
+  document.title = 'BG1 (KAB)';
   addViewportMeta();
   disableDoubleTapZoom();
   createReactRoot().render(
