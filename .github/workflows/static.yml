@@ -32,6 +32,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v3
+      - name: KB ls
+        run: ls
+      - name: KB build
+        run: npm run build
+      - name: KB ls 2
+        run: ls
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
