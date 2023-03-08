@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en-US">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BG1 Start</title>
+<link rel="stylesheet" href="index.css">
+
+<style>
+  .donate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    position: sticky;
+    bottom: 0;
+    margin: 0 -1.2rem;
+    padding: .5em 1.2em;
+    font-size: 1.6rem;
+    text-align: center;
+    background: #cee0fd;
+    color: #000;
+  }
+
+  .donate .button {
+    min-width: auto;
+    padding: .3em .8em;
+    text-decoration: none;
+    color: #f8f8f8;
+  }
+
+  .skip-reminder {
+    margin-top: 5rem;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .samsung {
+    display: none;
+  }
+
+</style>
+
+<header>
+  <h1>BG1 Start</h1>
+</header>
+
+<aside class="warning samsung">
+  <p><strong>Samsung users:</strong> Bookmarklets are no longer supported by the Samsung Internet browser. To continue using BG1, you will need to set it up in Chrome instead. <a href="https://kabb5.github.io/bg1/#chrome">Please follow these instructions</a>.</p>
+
+  <p>Sorry for the inconvenience!</p>
+</aside>
+
+<script>
+  if (navigator.userAgent.includes('SamsungBrowser')) {
+    document.querySelector('.samsung')?.classList.remove('samsung');
+  }
+</script>
+
+<main>
+  <nav>
+    <h2>Walt Disney World</h2>
+    <ul class="buttons">
+      <li><a href="https://disneyworld.disney.go.com/vas/">Genie+</a></li>
+      <li><a href="https://vqguest-svc-wdw.wdprapps.disney.com/application/v1/guest/getQueues">Virtual Queue</a></li>
+    </ul>
+
+    <h2>Disneyland</h2>
+    <ul class="buttons">
+      <li><a href="https://disneyland.disney.go.com/vas/">Genie+</a></li>
+      <li><a href="https://vqguest-svc.wdprapps.disney.com/application/v1/guest/getQueues">Virtual Queue</a></li>
+    </ul>
+  </nav>
+
+  <div class="skip-reminder">
+    <label><input type="checkbox"> <span>Skip bookmarklet reminder</span></label>
+  </div>
+</main>
+
+<div class="donate">
+  <div>Want to help support BG1?</div>
+  <div><a href="contact.html#donate" class="button">Donate</a></div>
+</div>
+
+<footer>
+  <ul>
+    <li><a href=".">Documentation</a></li>
+    <li><a href="contact.html">About BG1</a></li>
+    <li><a href="https://github.com/kabb5/bg1">GitHub</a></li>
+  </ul>
+</footer>
+
+<script>
+  const skipKey = 'bg1.skipReminder';
+  const skipChk = document.querySelector('.skip-reminder input');
+  skipChk.checked = localStorage.getItem(skipKey);
+  skipChk.addEventListener('change', () => {
+    localStorage.setItem(skipKey, skipChk.checked ? '1' : '');
+  })
+
+  function showReminder() {
+    if (skipChk.checked) return;
+    alert('After the "code" page loads, you need to run the BG1 Bookmarklet again to load the BG1 interface.');
+  }
+
+  document.querySelectorAll('.buttons a').forEach(a => {
+    a.addEventListener('click', showReminder);
+  });
+</script>
