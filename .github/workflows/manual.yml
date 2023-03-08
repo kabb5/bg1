@@ -30,7 +30,7 @@ jobs:
       run: pwd
     # - name: build
     #   run: npm run build
-    - name: LS..
-      run: ls ..
-    # - name: Run deploy.sh
-    #   run: ./deploy.sh
+    - name: Run deploy.sh
+      run: bash ${GITHUB_WORKSPACE}/deploy.sh
+    - name: LS
+      run: ls
