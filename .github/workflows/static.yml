@@ -1,0 +1,67 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy kabb5/BG1 to kabb5.github.io/bg1
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["donald"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Build project
+        run: npm run build
+        
+      - name: KB ls
+        run: ls
+        
+      - name: KB copy dist/* to root
+        run: scp ./dist/* .
+        
+      - name: KB copy landing/* to root
+        run: scp ./landing/* .
+        
+      - name: KB ls
+        run: ls
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
