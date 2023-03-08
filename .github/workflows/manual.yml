@@ -28,6 +28,8 @@ jobs:
     # Runs a single command using the runners shell
     - name: PWD
       run: pwd
+    - name: build
+      run: npm run build
     - name: LS
       run: ls
     # - name: Run deploy.sh
