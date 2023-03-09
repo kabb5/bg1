@@ -188,8 +188,7 @@ function LateNightLottoPickModal() {
     <Modal heading={LATE_NIGHT_LOTTO_PICK}>
       <p>
         When an attraction has a Lightning Lane return time near park closing time,
-        it's highlighted as a Late Night Lotto Pick. Book these and hope they go
-        down to generate a Multiple Experience Pass for tomorrow!
+        it's highlighted as a Late Night Lotto Pick.
       </p>
     </Modal>
   );

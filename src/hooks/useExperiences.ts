@@ -72,9 +72,9 @@ function timeToMinutes(time: string) {
 
 const sorters = {
   priority: ((a, b) =>
-    sortByLP(a, b) ||
-    sortByLNLP(a, b) || // TODO: this should also check for the current time of day 
+    sortByLP(a, b) || 
     sortByPriority(a, b) ||
+    sortByLNLP(a, b) || // TODO: this should also check for the current time of day
     sortByStandby(a, b) ||
     sortBySoonest(a, b)) as Sorter,
   standby: ((a, b) => sortByStandby(a, b) || sortBySoonest(a, b)) as Sorter,
@@ -151,7 +151,7 @@ export default function useExperiences<
           const returnTime = exp?.flex?.nextAvailableTime;
           return {
             ...exp,
-            lnlp:!!returnTime && timeToMinutes(returnTime) > 3, // TODO: fix this!
+            lnlp:!!returnTime &&  timeToMinutes(returnTime) > 3, // TODO: fix this!
             lp:
               !!returnTime &&
               standby >= LP_MIN_STANDBY &&
