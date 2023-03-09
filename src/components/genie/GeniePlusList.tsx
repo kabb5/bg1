@@ -2,7 +2,7 @@ import { useGenieClient } from '@/contexts/GenieClient';
 import { useModal } from '@/contexts/Modal';
 import { useTheme } from '@/contexts/Theme';
 import { displayTime } from '@/datetime';
-import { PlusExperience } from '@/hooks/useExperiences';
+import { PlusExperience, timeToMinutes } from '@/hooks/useExperiences';
 import CheckmarkIcon from '@/icons/CheckmarkIcon';
 import DiceIcon from '@/icons/DiceIcon';
 import DropIcon from '@/icons/DropIcon';
@@ -55,6 +55,11 @@ export default function GeniePlusList({
         <h3 className="flex-1 mt-0 text-lg font-semibold leading-tight truncate">
           {exp.name}
         </h3>
+        { exp.lp ? (
+          <>
+           (dateTimeStrings() - timeToMinutes(exp.flex.nextAvailableTime.toString()))
+          </>
+        ) : null}
         { exp.lp ? (
           <InfoButton
             name={LIGHTNING_PICK}

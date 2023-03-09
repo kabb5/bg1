@@ -24,6 +24,12 @@ interface ExperienceExtras {
 export type Experience = BaseExp & ExperienceExtras;
 export type PlusExperience = BasePlusExp & ExperienceExtras;
 
+export function timeToMinutes(time: string) {
+  const [h, m] = time.split(':').map(Number);
+  // Treat 7 AM as the beginning of the day
+  return ((h + 17) % 24) * 60 + m;
+}
+
 type Sorter = (a: Experience, b: Experience, coords?: Coords) => number;
 
 const sortByLNLP: Sorter = (a, b) => +!a.lnlp - +!b.lnlp;
@@ -62,12 +68,6 @@ function inPark(park: Park, coords: Coords) {
   const { n, s, e, w } = park.geo;
   const [lat, lon] = coords;
   return lat < n && lat > s && lon < e && lon > w;
-}
-
-function timeToMinutes(time: string) {
-  const [h, m] = time.split(':').map(Number);
-  // Treat 7 AM as the beginning of the day
-  return ((h + 17) % 24) * 60 + m;
 }
 
 const sorters = {
