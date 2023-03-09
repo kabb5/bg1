@@ -1,6 +1,6 @@
 import { useGenieClient } from '@/contexts/GenieClient';
 import { useModal } from '@/contexts/Modal';
-import { useTheme } from '@/contexts/Theme';
+import { Theme, useTheme } from '@/contexts/Theme';
 import { dateTimeStrings, displayTime } from '@/datetime';
 import { PlusExperience, timeToMinutes } from '@/hooks/useExperiences';
 import CheckmarkIcon from '@/icons/CheckmarkIcon';
@@ -174,7 +174,7 @@ function InfoButton({
   );
 }
 
-function MinutesUntil({experience}: {experience: PlusExperience}) {
+function MinutesUntil({experience, theme}: {experience: PlusExperience, theme:Theme}) {
   const now = dateTimeStrings();
   const nowMins = timeToMinutes(now.time);
   const nextAvailableTime = experience.flex.nextAvailableTime;
@@ -184,7 +184,7 @@ function MinutesUntil({experience}: {experience: PlusExperience}) {
 
   return (
     minutesUntil > 0 ? (
-    <span>{minutesUntil}</span>
+    <span className={`font-semibold ${theme.text}`}>{minutesUntil}</span>
     ) : null
   );
 }
