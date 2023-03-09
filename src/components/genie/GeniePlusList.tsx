@@ -1,7 +1,7 @@
 import { useGenieClient } from '@/contexts/GenieClient';
 import { useModal } from '@/contexts/Modal';
 import { useTheme } from '@/contexts/Theme';
-import { displayTime } from '@/datetime';
+import { dateTimeStrings, displayTime } from '@/datetime';
 import { PlusExperience, timeToMinutes } from '@/hooks/useExperiences';
 import CheckmarkIcon from '@/icons/CheckmarkIcon';
 import DiceIcon from '@/icons/DiceIcon';
@@ -56,9 +56,9 @@ export default function GeniePlusList({
           {exp.name}
         </h3>
         { exp.lp ? (
-          <>
-           (dateTimeStrings() - timeToMinutes(exp.flex.nextAvailableTime.toString()))
-          </>
+          <MinutesUntil
+            experience={exp}
+          />
         ) : null}
         { exp.lp ? (
           <InfoButton
@@ -171,6 +171,21 @@ function InfoButton({
     >
       {<Icon />}
     </button>
+  );
+}
+
+function MinutesUntil({experience}: {experience: PlusExperience}) {
+  const now = dateTimeStrings();
+  const nowMins = timeToMinutes(now.time);
+  const nextAvailableTime = experience.flex.nextAvailableTime;
+  const nextAvailableMins = nextAvailableTime ? timeToMinutes(nextAvailableTime) : nowMins;
+
+  const minutesUntil = nextAvailableMins - nowMins;
+
+  return (
+    minutesUntil > 0 ? (
+    <span>{minutesUntil}</span>
+    ) : null
   );
 }
 
