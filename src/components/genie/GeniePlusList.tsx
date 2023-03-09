@@ -58,6 +58,7 @@ export default function GeniePlusList({
         { exp.lp ? (
           <MinutesUntil
             experience={exp}
+            theme={theme}
           />
         ) : null}
         { exp.lp ? (
