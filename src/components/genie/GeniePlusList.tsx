@@ -47,7 +47,7 @@ export default function GeniePlusList({
 
   const expListItem = (exp: PlusExperience) => (
     <li
-      className="pb-3 first:border-0 border-t-4 border-gray-300"
+      className="pb-1 first:border-0 border-t-2 border-gray-300"
       key={exp.id + (exp.starred ? '*' : '')}
     >
       <div className="flex items-center gap-x-2 mt-2">
@@ -55,13 +55,6 @@ export default function GeniePlusList({
         <h3 className="flex-1 mt-0 text-lg font-semibold leading-tight truncate">
           {exp.name}
         </h3>
-        {exp.lnlp ? (
-          <InfoButton
-            name={LATE_NIGHT_LOTTO_PICK}
-            icon={DiceIcon}
-            onClick={showLateNightLottoPickModal}
-          />
-          ) : null}
         { exp.lp ? (
           <InfoButton
             name={LIGHTNING_PICK}
@@ -82,6 +75,13 @@ export default function GeniePlusList({
             onClick={showBookedModal}
           />
         )}
+        {exp.lnlp ? (
+          <InfoButton
+            name={LATE_NIGHT_LOTTO_PICK}
+            icon={DiceIcon}
+            onClick={showLateNightLottoPickModal}
+          />
+          ) : null}
       </div>
       <div className="flex flex-wrap gap-1.5 mt-2">
         <StandbyTime experience={exp} />
@@ -137,6 +137,11 @@ export default function GeniePlusList({
           sym={<CheckmarkIcon className={theme.text} />}
           def={BOOKED}
           onInfo={showBookedModal}
+        />
+        <Symbol
+          sym={<DiceIcon className={theme.text} />}
+          def={LATE_NIGHT_LOTTO_PICK}
+          onInfo={showLateNightLottoPickModal}
         />
       </Legend>
     </>
